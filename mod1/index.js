@@ -60,15 +60,15 @@ console.log(calculateSum(1, 2, 3, 4, 5));
 
 //callback
 
-function printDetails(callback){
-    const details = {
+function printuserDetails(callback){
+    const userDetails = {
         name: "user1",
         age: 21
     };
-    callback(details)
+    callback(userDetails)
 }
 
-printDetails((data) => console.log("Details: ", data));
+printuserDetails((data) => console.log("userDetails: ", data));
 
 // array functions
 
@@ -117,3 +117,157 @@ console.log(num);
 const newArray = num.splice(1, 3); //deleting elements at a particular index
 console.log(newArray);
 console.log(num);
+
+
+const orders = [
+    {
+        id: 1,
+        product: "Laptop",
+        quantity: 2,
+        price: 1000
+    },
+    {
+        id: 2,
+        product: "Mobile",
+        quantity: 3,
+        price: 700
+    },
+    {
+        id: 3,
+        product: "IPad",
+        quantity: 4,
+        price: 600
+    }];
+
+//map - transforms the existing elements of the array
+const ordersPriceList = orders.map((order) => order.price);
+console.log(ordersPriceList);
+
+
+const newOrders = orders.map(order => {
+    return {
+        ...order, 
+        totalPrice: order.price * order.quantity
+    }
+})
+console.log(newOrders);
+
+
+//find total price of all orders
+
+const totalOrdersPrice = newOrders.reduce((sum, curr) => {
+    return sum + curr.totalPrice;
+}, 0);
+
+console.log(totalOrdersPrice);
+
+
+
+//destructuring of objects
+
+let userDetails = {
+    name: "user1",
+    type: "regular",
+    age: 0
+};
+
+const {name, type, age} = userDetails;
+console.log(name);
+
+const {name:userName} = userDetails;
+console.log(userName);
+
+
+
+//add the isActive and role to user
+
+userDetails = {...userDetails, role: "Admin", isActive: true};
+console.log(userDetails);
+
+
+userDetails.gender = "male";
+
+
+//nullish coalescing
+
+const userAge = userDetails.batch ??  0;
+console.log(userAge);
+
+// || - checks if the value is falsy 
+// ?? checks if the value is null/undefined.
+
+
+//importing and exporting
+import {add, subtract, multiply} from './mathUtil.js';
+console.log(add(2, 3));
+
+
+
+//Promises
+
+function fetchData(){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const isServerAvailable = true;
+            if(isServerAvailable){
+                resolve({id: 1, name: "user1"});
+            }
+            reject(new Error('Server is unavailable'));
+        }, 5000);   
+    })
+}
+
+
+fetchData()
+.then(data => console.log(data))
+.catch(error => console.log(error.message))
+
+
+
+
+
+//fetch api
+
+const fetchPostData = () => {
+    return fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => {
+        if(!response.ok){
+            throw new Error('Response not received');
+        }
+        return response.json();
+    })
+}
+
+const fetchUserData = () => {
+    return fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => {
+        if(!response.ok){
+            throw new Error('Response not received');
+        }
+        return response.json();
+    })
+}
+
+fetchPostData()
+.then(data => console.log(data.slice(0, 5)))
+.catch(error => console.log(error.message));
+
+const fetchError = () => {
+    return new Error('new error')
+};
+
+
+
+//promise chaining
+fetchUserData()
+.then(data => {
+    console.log(data);
+    return fetchPostData()
+}
+).then(data => {
+    console.log(data)
+}
+)
+
+
+
