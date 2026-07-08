@@ -109,3 +109,11 @@ const newNum = [...num, 100, 200, 500];
 const uniqueElements = [...new Set(num)]
 
 console.log(uniqueElements);
+
+
+num.splice(0, 0, 100, 200, 300);//adding element at a particular index
+
+console.log(num);
+const newArray = num.splice(1, 3); //deleting elements at a particular index
+console.log(newArray);
+console.log(num);
