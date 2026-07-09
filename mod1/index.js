@@ -226,7 +226,7 @@ fetchData()
 
 
 
-//fetch api
+
 
 const fetchPostData = () => {
     return fetch('https://jsonplaceholder.typicode.com/posts')
@@ -252,13 +252,9 @@ fetchPostData()
 .then(data => console.log(data.slice(0, 5)))
 .catch(error => console.log(error.message));
 
-const fetchError = () => {
-    return new Error('new error')
-};
 
 
-
-//promise chaining
+// promise chaining
 fetchUserData()
 .then(data => {
     console.log(data);
@@ -270,4 +266,22 @@ fetchUserData()
 )
 
 
+const fetchDummyData = () => {
+    return fetch("https://dummyjson.com/products")
+    .then(response => {
+        if(response.status !== 200){
+            throw new Error('Error while fetching data');
+        }
+        return response.json();
+    })
+}
 
+fetchDummyData()
+.then(data => console.log(data.products.slice(0, 5)))
+
+
+//async await
+
+const fetchUserData = async() => {
+    fetch("")
+}
