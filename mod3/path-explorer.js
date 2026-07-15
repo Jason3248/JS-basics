@@ -2,7 +2,7 @@ import path from 'node:path';
 
 const fileName = 'annual-report.pdf';
 const filePath = path.join(process.cwd(), 'documents', 'reports', fileName);
-
+console.log(process.cwd())
 
 //Path Parse
 

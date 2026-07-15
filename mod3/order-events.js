@@ -13,7 +13,7 @@ const orderEvents = new EventEmitter();
 orderEvents.on('orderPlaced', (order) => {
     console.log(`Order #${order.id} placed successfully.
 Product: ${order.productName}.
-Quantity: ${order.quantity}.
+Quantity: ${order.quantity}. 
 Total Amount: ${order.amount}`);
 });
 
