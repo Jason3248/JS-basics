@@ -1,46 +1,46 @@
 {
   "students": [
     {
-      "id": "101",
+      "id": 101,
       "name": "Aarav Sharma",
       "age": 17,
       "grade": "A",
-      "active": true
+      "isActive": true,
+      "courses": [
+        "Computer Science"
+      ]
+
     },
     {
-      "id": "102",
+      "id": 102,
       "name": "Priya Patel",
       "age": 16,
       "grade": "B+",
-      "active": true
+      "isActive": true,
+      "courses": [
+        "Mathematics",
+        "Deep Learning"
+      ]
     },
     {
-      "id": "103",
-      "name": "Aarav Sharma",
-      "age": 17,
-      "grade": "A",
-      "active": true
+      "id": 103,
+      "name": "Yash Patel",
+      "age": 25,
+      "grade": "C",
+      "isActive": true,
+      "courses": [
+        "Psychology"
+      ]
     },
     {
-      "id": "104",
-      "name": "Aarav Sharma",
-      "age": 17,
-      "grade": "A",
-      "active": true
-    },
-    {
-      "id": "105",
-      "name": "Aarav Sharma",
-      "age": 17,
-      "grade": "A",
-      "active": true
-    },
-    {
-      "id": "106",
-      "name": "Aarav Sharma",
-      "age": 17,
-      "grade": "A",
-      "active": true
+      "id": 104,
+      "name": "Jason Dsouza",
+      "age": 21,
+      "grade": "B",
+      "isActive": true,
+      "courses": [
+        "software engineering"
+      ]
     }
   ]
 }

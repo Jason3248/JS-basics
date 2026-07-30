@@ -6,6 +6,7 @@ const dataFilePath = path.resolve('data', 'studentDetails.json');
 // console.log(Boolean('true'));
 
 
+
 export const getAllStudents = async (req, res) => {
     try {
         const { firstName, lastName, age, active } = req.query;
@@ -43,20 +44,49 @@ export const getStudentsById = async (req, res) => {
     }
 }
 
+// export const addStudent = async (req, res) => {
+//     try {
+//          const studentData = req.body;
+//         //  console.log(studentData);
+//          if(!studentData.id) return res.status(400).json({message: "Student ID Missing from request body"});
+//          const rawData = await fs.readFile(dataFilePath, 'utf-8');
+//          const parsedData = JSON.parse(rawData);
+//         //  if(!parsedData) throw new Error("Parsed data not available");
+//          const studentExists = parsedData.students.some(student => student.id == studentData.id);
+//          if(studentExists) return res.status(400).json({message : `Student with ID : ${studentData.id} already exists`})
+//          parsedData.students = [...parsedData.students, studentData];
+//          await fs.writeFile(dataFilePath, JSON.stringify(parsedData, null, 2));
+//          res.status(201).json({message : `New Student with id ${studentData.id} created successfully`})
+//     } catch (error) {
+//         console.log("Error while adding new student : ", error.message);
+//     }
+// }
+
 export const addStudent = async (req, res) => {
     try {
-         const studentData = req.body;
-        //  console.log(studentData);
-         if(!studentData.id) return res.status(400).json({message: "Student ID Missing from request body"});
-         const rawData = await fs.readFile(dataFilePath, 'utf-8');
-         const parsedData = JSON.parse(rawData);
-        //  if(!parsedData) throw new Error("Parsed data not available");
-         const studentExists = parsedData.students.some(student => student.id == studentData.id);
-         if(studentExists) return res.status(400).json({message : `Student with ID : ${studentData.id} already exists`})
-         parsedData.students = [...parsedData.students, studentData];
-         await fs.writeFile(dataFilePath, JSON.stringify(parsedData, null, 2));
-         res.status(201).json({message : `New Student with id ${studentData.id} created successfully`})
+        const { name, age, grade, isActive, courses } = req.body;
+        console.log(req.body);
+        if(!name || !age || !grade || !isActive || !courses){
+            return res.status(400).json({message : "Student details are missing"});
+        }
+        const rawData = await fs.readFile(dataFilePath, 'utf-8');
+        const parsedData = JSON.parse(rawData);
+        const newStudentId = parsedData.students.at(-1).id + 1;
+
+        const newStudent = {
+            id: newStudentId,
+            name,
+            age: Number(age),
+            grade,
+            isActive: Boolean(isActive),
+            courses
+        };
+        console.log(newStudent);
+        parsedData.students.push(newStudent);
+        await fs.writeFile(dataFilePath, JSON.stringify(parsedData, null, 2));
+        res.status(201).json({message: `New student with id: ${newStudentId} created successfully`});
+
     } catch (error) {
-        console.log("Error while adding new student : ", error.message);
+        console.log("Error while adding student : ". error.message);
     }
 }
