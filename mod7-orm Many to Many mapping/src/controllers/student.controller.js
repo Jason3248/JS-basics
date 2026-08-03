@@ -1,9 +1,11 @@
 import { parse } from "dotenv";
-import {Student, StudentProfile} from "../models/index.js";
+import {Student, StudentProfile, Course} from "../models/index.js";
 import handleSequelizeError from "../middlewares/handleSequelizeError.js";
 import parseIntId from "../utils.js/parseIntId.js";
 import verifyUpdationData from "../utils.js/verifyUpdationData.js";
-
+import Enrollment from "../models/enrollment.model.js";
+import { buildPagination, buildWhere } from "../utils.js/buildFunctions.js";
+import { studentFilterConfig } from "../utils.js/filterConfig.js";
 
 export const createStudent = async(req, res) => {
     try {
@@ -73,17 +75,51 @@ export const createStudentProfile = async(req, res) => {
 
 export const getAllStudents = async(req, res) => {
     try {
-        const students = await Student.findAll({
-            include: {
+        const {limit, offset, order, page} = buildPagination(
+            req.query, 
+            ['firstName', 'lastName', 'createdAt']
+        );
+        const where = buildWhere(req.query, studentFilterConfig);
+        console.log(where);
+        const {count, rows} = await Student.findAndCountAll({
+            where,
+            include: [
+               { 
                 model: StudentProfile,
-                as: "profile"
-            },
-            order: [["id", "ASC"]]
+                as: "profile",
+                // where: {isActive: true},chr
+                required: false
+               },
+               {
+                model: Course,
+                as: "course",
+                required: false
+               }
+            //    {
+            //     model: Course,
+            //     as: "course",
+            //     required: false
+            //    }
+            ],
+               
+               limit,
+               offset,
+               order,
+            //    distinct: true,
+            //    subQuery: false
         });
+        const totalPages = Math.ceil(count / limit);
         return res.status(200).json({
             success: true,
-            count: students.length,
-            data: students
+            data: rows,
+            pagination: {
+                totalDataCount: count,
+                currentPage: page,
+                pageSize: limit,
+                totalPages,
+                hasNextPage: page < totalPages,
+                hasPrevPage: page > 1
+                },
         })
     } catch (error) {
         return handleSequelizeError(error, res);

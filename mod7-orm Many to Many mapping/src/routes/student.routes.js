@@ -18,4 +18,5 @@ router.route("/:id/profile").post(studentController.createStudentProfile)
                             .put(studentController.updateStudentProfile)
                             .delete(studentController.deleteStudentProfile);
 
+
 export default router;

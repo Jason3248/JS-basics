@@ -13,4 +13,5 @@ router.route("/:id").get(courseCountroller.getCourseById)
                      .delete(courseCountroller.deleteCourse);
 
 router.route("/:id/toggle").patch(courseCountroller.toggleCourseStatus);
+router.route("/:id/activeStudents").get(courseCountroller.getActiveStudents);
 export default router;

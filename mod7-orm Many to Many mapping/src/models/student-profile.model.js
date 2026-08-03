@@ -28,6 +28,10 @@ const StudentProfile = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: true
         },
+        city: {
+            type: DataTypes.STRING(50),
+            allowNull: true
+        },
         dateOfBirth: {
             type: DataTypes.DATEONLY,
             allowNull: true,

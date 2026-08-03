@@ -28,7 +28,9 @@ const Enrollment = sequelize.define(
     {
         tableName: "enrollments",
         underscored: true,
-        timestamps: false
+        timestamps: true,
+        createdAt: 'enrolled_at',
+        updatedAt: false
     }
 )
 
