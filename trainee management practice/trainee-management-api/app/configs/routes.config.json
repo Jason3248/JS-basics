@@ -1,0 +1,91 @@
+[
+    {
+        "route": "/api/departments",
+        "method": "get",
+        "action": "getDepartments",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments/:id",
+        "method": "get",
+        "action": "getDepartmentById",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments/:id/students",
+        "method": "get",
+        "action": "getStudents",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments",
+        "method": "post",
+        "action": "createDepartment",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments/:id",
+        "method": "put",
+        "action": "updateDepartment",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments/:id",
+        "method": "delete",
+        "action": "deleteDepartment",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+    {
+        "route": "/api/departments/:id",
+        "method": "put",
+        "action": "restoreDepartment",
+        "controller": "../components/department/controllers/department.controller.js"
+    },
+
+
+
+
+    {
+        "route": "/api/students",
+        "method": "get",
+        "action": "getStudents",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students/:id",
+        "method": "get",
+        "action": "getStudentById",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students/:id/department",
+        "method": "get",
+        "action": "getDepartment",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students",
+        "method": "post",
+        "action": "createStudent",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students/:id",
+        "method": "put",
+        "action": "updateStudent",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students/:id",
+        "method": "delete",
+        "action": "deleteStudent",
+        "controller": "../components/student/controllers/student.controller.js"
+    },
+    {
+        "route": "/api/students/:id",
+        "method": "put",
+        "action": "restoreStudent",
+        "controller": "../components/student/controllers/student.controller.js"
+    }
+
+]
